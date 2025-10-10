@@ -515,6 +515,7 @@ public interface ConfigurationSection {
      */
     default @Nullable ConfigurationSection getConfigurationSection(@NotNull String path) {
         SectionData data = this.getSectionData(path);
+        if (data instanceof ConfigurationSection section) return section;
         if (!(data.getData() instanceof Map)) return null;
 
         MemoryConfiguration configuration = new MemoryConfiguration(this, this.getKey(path));
