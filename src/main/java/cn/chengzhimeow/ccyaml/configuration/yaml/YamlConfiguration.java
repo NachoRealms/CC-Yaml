@@ -19,47 +19,6 @@ import java.util.Map;
 
 @SuppressWarnings("unused")
 public class YamlConfiguration extends MemoryConfiguration {
-    public final @NotNull LoaderOptions loaderOptions;
-    public final @NotNull DumperOptions dumperOptions;
-    private final @NotNull YamlConstructor constructor;
-    private final @NotNull YamlRepresenter representer;
-    private final @NotNull Yaml yaml;
-
-    public YamlConfiguration(@NotNull LoaderOptions loaderOptions, @NotNull DumperOptions dumperOptions, @NotNull YamlConstructor constructor, @NotNull YamlRepresenter representer) {
-        super(null, "");
-
-        this.loaderOptions = loaderOptions;
-        this.dumperOptions = dumperOptions;
-        this.constructor = constructor;
-        this.representer = representer;
-
-        this.yaml = new Yaml(this.constructor, this.representer, this.dumperOptions, this.loaderOptions);
-    }
-
-    public YamlConfiguration(@NotNull LoaderOptions loaderOptions, @NotNull DumperOptions dumperOptions, @NotNull YamlConstructor constructor) {
-        this(loaderOptions, dumperOptions, constructor, new YamlRepresenter(dumperOptions));
-    }
-
-    public YamlConfiguration(@NotNull LoaderOptions loaderOptions, @NotNull DumperOptions dumperOptions, @NotNull YamlRepresenter representer) {
-        this(loaderOptions, dumperOptions, new YamlConstructor(loaderOptions), representer);
-    }
-
-    public YamlConfiguration(@NotNull LoaderOptions loaderOptions, @NotNull DumperOptions dumperOptions) {
-        this(loaderOptions, dumperOptions, new YamlConstructor(loaderOptions));
-    }
-
-    public YamlConfiguration(@NotNull DumperOptions dumperOptions) {
-        this(YamlConfiguration.defaultLoaderOptions(), dumperOptions);
-    }
-
-    public YamlConfiguration(@NotNull LoaderOptions loaderOptions) {
-        this(loaderOptions, YamlConfiguration.defaultDumperOptions());
-    }
-
-    public YamlConfiguration() {
-        this(YamlConfiguration.defaultLoaderOptions());
-    }
-
     /**
      * 默认加载配置实例
      */
@@ -133,6 +92,46 @@ public class YamlConfiguration extends MemoryConfiguration {
      */
     public static boolean isNotNullAndEmpty(@Nullable Collection<?> collection) {
         return collection == null || collection.isEmpty();
+    }
+    public final @NotNull LoaderOptions loaderOptions;
+    public final @NotNull DumperOptions dumperOptions;
+    private final @NotNull YamlConstructor constructor;
+    private final @NotNull YamlRepresenter representer;
+    private final @NotNull Yaml yaml;
+
+    public YamlConfiguration(@NotNull LoaderOptions loaderOptions, @NotNull DumperOptions dumperOptions, @NotNull YamlConstructor constructor, @NotNull YamlRepresenter representer) {
+        super(null, "");
+
+        this.loaderOptions = loaderOptions;
+        this.dumperOptions = dumperOptions;
+        this.constructor = constructor;
+        this.representer = representer;
+
+        this.yaml = new Yaml(this.constructor, this.representer, this.dumperOptions, this.loaderOptions);
+    }
+
+    public YamlConfiguration(@NotNull LoaderOptions loaderOptions, @NotNull DumperOptions dumperOptions, @NotNull YamlConstructor constructor) {
+        this(loaderOptions, dumperOptions, constructor, new YamlRepresenter(dumperOptions));
+    }
+
+    public YamlConfiguration(@NotNull LoaderOptions loaderOptions, @NotNull DumperOptions dumperOptions, @NotNull YamlRepresenter representer) {
+        this(loaderOptions, dumperOptions, new YamlConstructor(loaderOptions), representer);
+    }
+
+    public YamlConfiguration(@NotNull LoaderOptions loaderOptions, @NotNull DumperOptions dumperOptions) {
+        this(loaderOptions, dumperOptions, new YamlConstructor(loaderOptions));
+    }
+
+    public YamlConfiguration(@NotNull DumperOptions dumperOptions) {
+        this(YamlConfiguration.defaultLoaderOptions(), dumperOptions);
+    }
+
+    public YamlConfiguration(@NotNull LoaderOptions loaderOptions) {
+        this(loaderOptions, YamlConfiguration.defaultDumperOptions());
+    }
+
+    public YamlConfiguration() {
+        this(YamlConfiguration.defaultLoaderOptions());
     }
 
     /**

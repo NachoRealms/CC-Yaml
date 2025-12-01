@@ -39,7 +39,7 @@ public class YamlConstructor extends SafeConstructor {
             String line = comment.getValue();
             // 如果不是空行, 则去除前导空格, 否则添加 null 以表示空行
             lines.add(comment.getCommentType() != CommentType.BLANK_LINE ?
-                    (line.startsWith(" ") ? line.substring(1) : line) : null
+                      (line.startsWith(" ") ? line.substring(1) : line) : null
             );
         }
         return lines;

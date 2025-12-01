@@ -99,7 +99,7 @@ public class YamlRepresenter extends Representer {
 
             if (styledString instanceof YamlStringSectionData yamlStringSectionData) {
                 if (value != null && yamlStringSectionData.node().getScalarStyle() == DumperOptions.ScalarStyle.FOLDED) {
-                    this.representer.getFoldLineList().add(yamlStringSectionData.node().getStartMark().getLine());
+                    this.representer.foldLineList.add(yamlStringSectionData.node().getStartMark().getLine());
                     return this.representer.representScalar(Tag.STR, value.replace(" ", "\n"), DumperOptions.ScalarStyle.LITERAL);
                 } else
                     return this.representer.representScalar(Tag.STR, value, yamlStringSectionData.node().getScalarStyle());

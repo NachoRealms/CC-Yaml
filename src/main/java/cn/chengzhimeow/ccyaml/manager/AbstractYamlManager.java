@@ -2,7 +2,6 @@ package cn.chengzhimeow.ccyaml.manager;
 
 import cn.chengzhimeow.ccyaml.CCYaml;
 import cn.chengzhimeow.ccyaml.configuration.yaml.YamlConfiguration;
-import lombok.Getter;
 import lombok.SneakyThrows;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -14,7 +13,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-@Getter
 @SuppressWarnings("unused")
 public abstract class AbstractYamlManager {
     private final @NotNull CCYaml instance;
@@ -42,7 +40,7 @@ public abstract class AbstractYamlManager {
      */
     public File getFile() {
         if (this.file == null)
-            this.file = new File(this.getInstance().getParent(), this.filePath());
+            this.file = new File(this.instance.getParent(), this.filePath());
         return this.file;
     }
 
@@ -50,7 +48,7 @@ public abstract class AbstractYamlManager {
      * 保存默认文件
      */
     public void saveDefaultFile() {
-        this.getInstance().getFileManager().saveResource(this.originFilePath(), this.filePath(), false);
+        this.instance.getFileManager().saveResource(this.originFilePath(), this.filePath(), false);
     }
 
     /**
@@ -66,13 +64,13 @@ public abstract class AbstractYamlManager {
      */
     @SneakyThrows
     public void update() {
-        String version = this.getInstance().getVersion();
-        String configVersion = this.getData().getString(this.getInstance().getConfigVersionKey());
+        String version = this.instance.getVersion();
+        String configVersion = this.getData().getString(this.instance.getConfigVersionKey());
 
         // 版本相同不处理
         if (configVersion != null && configVersion.equals(version)) return;
 
-        URL url = this.getInstance().getClassLoader().getResource(this.originFilePath());
+        URL url = this.instance.getClassLoader().getResource(this.originFilePath());
         if (url == null) return;
 
         try (InputStream in = url.openStream()) {
@@ -122,7 +120,7 @@ public abstract class AbstractYamlManager {
                 this.getData().setCommentList(key, comments);
             }
 
-            this.getData().set(this.getInstance().getConfigVersionKey(), version);
+            this.getData().set(this.instance.getConfigVersionKey(), version);
             this.getData().save(this.getFile());
         }
     }

@@ -9,22 +9,6 @@ import java.util.*;
 @ToString(exclude = {"parent"})
 @SuppressWarnings("unused")
 public class MemoryConfiguration implements ConfigurationSection {
-    private final @Nullable ConfigurationSection parent;
-    private final @Nullable String path;
-
-    protected @NotNull SectionData data = new SectionData(new LinkedHashMap<String, SectionData>());
-
-    /**
-     * MemoryConfiguration 的构造函数
-     *
-     * @param parent 父配置节点
-     * @param path   当前节点的路径
-     */
-    protected MemoryConfiguration(@Nullable ConfigurationSection parent, @Nullable String path) {
-        this.parent = parent;
-        this.path = path;
-    }
-
     /**
      * 创建空配置节点
      *
@@ -75,6 +59,20 @@ public class MemoryConfiguration implements ConfigurationSection {
         }
 
         return set;
+    }
+    private final @Nullable ConfigurationSection parent;
+    private final @Nullable String path;
+    protected @NotNull SectionData data = new SectionData(new LinkedHashMap<String, SectionData>());
+
+    /**
+     * MemoryConfiguration 的构造函数
+     *
+     * @param parent 父配置节点
+     * @param path   当前节点的路径
+     */
+    protected MemoryConfiguration(@Nullable ConfigurationSection parent, @Nullable String path) {
+        this.parent = parent;
+        this.path = path;
     }
 
     @Override

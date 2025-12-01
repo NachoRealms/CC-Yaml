@@ -13,23 +13,6 @@ import java.util.*;
 @ToString
 @SuppressWarnings("unused")
 public class SectionData {
-    private @Nullable Object data;
-    private @NotNull List<String> commentList;
-    private @NotNull List<String> inlineCommentList;
-    private @NotNull List<String> endCommentList;
-
-    public SectionData(@Nullable Object data) {
-        if (data instanceof String s) data = new StringSectionData(s);
-        this.data = data;
-        this.commentList = new ArrayList<>();
-        this.inlineCommentList = new ArrayList<>();
-        this.endCommentList = new ArrayList<>();
-    }
-
-    public SectionData() {
-        this(null);
-    }
-
     /**
      * 从 Map 转换
      *
@@ -53,6 +36,22 @@ public class SectionData {
         }
 
         return new SectionData(dataMap);
+    }
+    private @Nullable Object data;
+    private @NotNull List<String> commentList;
+    private @NotNull List<String> inlineCommentList;
+    private @NotNull List<String> endCommentList;
+
+    public SectionData(@Nullable Object data) {
+        if (data instanceof String s) data = new StringSectionData(s);
+        this.data = data;
+        this.commentList = new ArrayList<>();
+        this.inlineCommentList = new ArrayList<>();
+        this.endCommentList = new ArrayList<>();
+    }
+
+    public SectionData() {
+        this(null);
     }
 
     public void setData(@Nullable Object data) {
